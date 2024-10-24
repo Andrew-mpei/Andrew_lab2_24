@@ -9,7 +9,6 @@ import jade.lang.acl.MessageTemplate;
 import java.util.List;
 
 public class StartSumNewAgentBehaviour extends TickerBehaviour {
-    private List<Double> xdX = List.of(0.0, 0.0);
     private String[] functions = new String[] {"fun1", "fun2", "fun3"};
     private boolean flag = true;
     private boolean flag2 = true;
@@ -18,7 +17,6 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
     private double sumMines = 0;
     private double sumPlus = 0;
     private double sumCenter = 0;
-    private MessageTemplate mt;
     private int count = 0;
 
 
@@ -29,11 +27,7 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
         this.myAgent = a;
     }
 
-    @Override
-    public void onStart() {
-        this.mt = MessageTemplate.or(MessageTemplate.MatchPerformative(ACLMessage.SUBSCRIBE),
-                MessageTemplate.MatchPerformative(ACLMessage.PROPOSE));
-    }
+
 
     @Override
     protected void onTick() {
@@ -51,10 +45,10 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
         if (flag2 && !flag){
             ACLMessage msg2 = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.CONFIRM));
             if (msg2 != null){
+                count ++;
                 sumMines += Double.parseDouble(msg2.getContent().split(",")[0]);
                 sumCenter += Double.parseDouble(msg2.getContent().split(",")[1]);
                 sumPlus += Double.parseDouble(msg2.getContent().split(",")[2]);
-                count ++;
                 if (count == 3){
                     flag = true;
                     flag2 = false;
@@ -78,12 +72,11 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
             while (!myAgent.getLocalName().equals(newAgent)){
                 newAgent = functions[(int) (Math.random() * 3)];
             }
-            ACLMessage msg3 = new ACLMessage(ACLMessage.SUBSCRIBE);
+            ACLMessage msg3 = new ACLMessage(ACLMessage.DISCONFIRM);
             msg3.setContent(X+ "," + dX);
 
             msg3.addReceiver(new AID(newAgent, false));
             myAgent.send(msg3);
-            flag2 = true;
             myAgent.removeBehaviour(this);
         }
     }

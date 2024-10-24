@@ -7,20 +7,31 @@ import jade.lang.acl.MessageTemplate;
 import java.util.List;
 
 public class CheckInformBehaviour extends Behaviour {
-    private List<Double> xdX = List.of(0.0, 0.0);
     Double X;
     Double dX;
+    boolean flag = false;
     @Override
     public void action() {
-        ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.SUBSCRIBE));
+        ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.DISCONFIRM));
         if (msg != null){
-            if (Double.parseDouble(msg.getContent().split(",")[1]) > 0.001){
+            if (Double.parseDouble(msg.getContent().split(",")[1]) > 0.0000001){
                  X = Double.parseDouble(msg.getContent().split(",")[0]);
                  dX = Double.parseDouble(msg.getContent().split(",")[1]);
-                myAgent.addBehaviour(new StartSumNewAgentBehaviour(this.myAgent, 1000, X, dX));
+                 myAgent.addBehaviour(new StartSumNewAgentBehaviour(this.myAgent, 1, X, dX));
             }else{
-                System.out.println("X = " + Double.parseDouble(msg.getContent().split(",")[0]));
+                System.out.println("Xmin = " + Double.parseDouble(msg.getContent().split(",")[0]));
                 System.out.println("dX = " + Double.parseDouble(msg.getContent().split(",")[1]));
+                Functions culcFunctions = new Functions(
+                        Double.parseDouble(msg.getContent().split(",")[0])
+                        , Double.parseDouble(msg.getContent().split(",")[1])
+                );
+                String result = String.valueOf(
+                        culcFunctions.Func1().get(1)
+                        + culcFunctions.Func2().get(1)
+                        + culcFunctions.Func3().get(1)
+                );
+                System.out.println("Минимум функции e^(0.2x)+cos(x)+2^(-x) ");
+                System.out.println("Ymin = " + result);
             }
         }
     }

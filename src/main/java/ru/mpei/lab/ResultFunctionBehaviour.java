@@ -28,7 +28,6 @@ public class ResultFunctionBehaviour extends Behaviour {
             if (myAgent.getLocalName().equals("fun3")){
                 fun = culcFunctions.Func3();
             }
-
             String content = fun.get(0) + "," ;
             content += fun.get(1) + "," ;
             content += fun.get(2);
@@ -36,8 +35,6 @@ public class ResultFunctionBehaviour extends Behaviour {
             msg2.setContent(content);
             msg2.addReceiver(new AID(msg.getSender().getLocalName(), false));
             myAgent.send(msg2);
-
-
         }else{
             block();
         }
