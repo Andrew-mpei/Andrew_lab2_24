@@ -2,8 +2,6 @@ package ru.mpei.lab;
 
 import jade.core.Agent;
 
-import java.util.List;
-import java.util.Scanner;
 
 public class FunctionAgent extends Agent {
     @Override

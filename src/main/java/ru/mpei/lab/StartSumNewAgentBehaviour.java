@@ -6,7 +6,6 @@ import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import java.util.List;
 
 public class StartSumNewAgentBehaviour extends TickerBehaviour {
     private String[] functions = new String[] {"fun1", "fun2", "fun3"};
