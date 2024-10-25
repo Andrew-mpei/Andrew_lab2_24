@@ -61,16 +61,18 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
         if(!flag2 && flag){//определяем нового агента и отправляем ему новые Х и dX
             if (sumCenter > sumMines && sumPlus > sumMines){
                 X -= dX;
-            }
-            if (sumPlus < sumCenter && sumPlus < sumMines){
+            } else if (sumPlus < sumCenter && sumPlus < sumMines){
                 X += dX;
             }else{
                 dX /= 2;
             }
             String newAgent = functions[(int) (Math.random() * 3)];
-            while (!myAgent.getLocalName().equals(newAgent)){
+            while (myAgent.getLocalName().equals(newAgent)){
                 newAgent = functions[(int) (Math.random() * 3)];
             }
+            System.err.println("Инициатор " + newAgent);
+            System.err.println("Х = " + X + "  dX = " + dX + "  Ymines = " + sumMines + "  Y = " + sumCenter
+                    + "   Yplus = " + sumPlus + "\n");
             ACLMessage msg3 = new ACLMessage(ACLMessage.DISCONFIRM);
             msg3.setContent(X+ "," + dX);
 

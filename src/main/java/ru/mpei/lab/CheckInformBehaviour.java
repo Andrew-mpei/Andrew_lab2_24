@@ -16,19 +16,14 @@ public class CheckInformBehaviour extends Behaviour {
             if (Double.parseDouble(msg.getContent().split(",")[1]) > 0.0000001){
                  X = Double.parseDouble(msg.getContent().split(",")[0]);
                  dX = Double.parseDouble(msg.getContent().split(",")[1]);
-                 myAgent.addBehaviour(new StartSumNewAgentBehaviour(this.myAgent, 1, X, dX));
+                 myAgent.addBehaviour(new StartSumNewAgentBehaviour(this.myAgent, 10, X, dX));
             }else{
-                System.out.println("Xmin = " + Double.parseDouble(msg.getContent().split(",")[0]));
-                System.out.println("dX = " + Double.parseDouble(msg.getContent().split(",")[1]));
-                Functions culcFunctions = new Functions(
-                        Double.parseDouble(msg.getContent().split(",")[0])
-                        , Double.parseDouble(msg.getContent().split(",")[1])
-                );
-                String result = String.valueOf(
-                        culcFunctions.Func1().get(1)
-                        + culcFunctions.Func2().get(1)
-                        + culcFunctions.Func3().get(1)
-                );
+                Double Xmin = Double.parseDouble(msg.getContent().split(",")[0]);
+                System.out.println("Xmin = " + Xmin);
+                double dX = Double.parseDouble(msg.getContent().split(",")[1]);
+                System.out.println("dX = " + dX);
+                Functions culcFunctions = new Functions(Xmin, dX);
+                Double result = culcFunctions.Func1().get(1) + culcFunctions.Func2().get(1) + culcFunctions.Func3().get(1);
                 System.out.println("Минимум функции e^(0.2x)+cos(x)+2^(-x) ");
                 System.out.println("Ymin = " + result);
             }
