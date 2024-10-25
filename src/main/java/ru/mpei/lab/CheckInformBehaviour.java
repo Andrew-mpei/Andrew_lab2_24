@@ -20,10 +20,14 @@ public class CheckInformBehaviour extends Behaviour {
             }else{
                 Double Xmin = Double.parseDouble(msg.getContent().split(",")[0]);
                 System.out.println("Xmin = " + Xmin);
+
                 double dX = Double.parseDouble(msg.getContent().split(",")[1]);
                 System.out.println("dX = " + dX);
+
                 Functions culcFunctions = new Functions(Xmin, dX);
-                Double result = culcFunctions.Func1().get(1) + culcFunctions.Func2().get(1) + culcFunctions.Func3().get(1);
+                Double result = culcFunctions.Func1().get(1) + culcFunctions.Func2().get(1)
+                        + culcFunctions.Func3().get(1);
+
                 System.out.println("Минимум функции e^(0.2x)+cos(x)+2^(-x) ");
                 System.out.println("Ymin = " + result);
             }

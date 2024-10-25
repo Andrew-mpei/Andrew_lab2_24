@@ -71,8 +71,7 @@ public class StartSumNewAgentBehaviour extends TickerBehaviour {
                 newAgent = functions[(int) (Math.random() * 3)];
             }
             System.err.println("Инициатор " + newAgent);
-            System.err.println("Х = " + X + "  dX = " + dX + "  Ymines = " + sumMines + "  Y = " + sumCenter
-                    + "   Yplus = " + sumPlus + "\n");
+            System.err.println("Х = " + X + "  dX = " + dX + "\n");
             ACLMessage msg3 = new ACLMessage(ACLMessage.DISCONFIRM);
             msg3.setContent(X+ "," + dX);
 

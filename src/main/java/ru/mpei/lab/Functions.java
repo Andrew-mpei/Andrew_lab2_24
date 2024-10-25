@@ -21,7 +21,7 @@ public class Functions {
     }
 
     public List<Double> Func1(){
-        clean();
+        this.fun.clear();
         getFun().add(Math.exp(0.2*(X-dX)));
         getFun().add(Math.exp(0.2*(X)));
         getFun().add(Math.exp(0.2*(X+dX)));
@@ -29,14 +29,14 @@ public class Functions {
         return getFun();
     }
     public List<Double> Func2(){
-        clean();
+        this.fun.clear();
         getFun().add(Math.pow(2, (-1)*(X-dX)));
         getFun().add(Math.pow(2, (-1)*X));
         getFun().add(Math.pow(2, (-1)*(X+dX)));
         return getFun();
     }
     public List<Double> Func3(){
-        clean();
+        this.fun.clear();
         getFun().add(Math.cos(X-dX));
         getFun().add(Math.cos(X));
         getFun().add(Math.cos(X+dX));
